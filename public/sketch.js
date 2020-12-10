@@ -7,7 +7,7 @@ function setup() {
     createCanvas(displayWidth - 50, displayHeight - 175);
     background(100);
 
-    socket = io.connect('http://localhost:5000/');
+    socket = io.connect('https://shareablewhiteboard.herokuapp.com/');
     socket.on('someoneDrew', (data) => {
         stroke(...data.color.levels)
         line(data.x, data.y, data.px, data.py)
