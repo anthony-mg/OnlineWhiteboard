@@ -1,0 +1,29 @@
+{
+  "name": "shareable-whiteboard",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/anthony-mg/OnlineWhiteboard.git"
+  },
+  "author": "Anthony Menard-Gill (2020)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/anthony-mg/OnlineWhiteboard/issues"
+  },
+  "homepage": "https://github.com/anthony-mg/OnlineWhiteboard#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "p5": "^1.1.9",
+    "socket.io": "^3.0.4"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.6"
+  }
+}
