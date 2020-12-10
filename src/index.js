@@ -7,18 +7,21 @@ app.use(express.static('public'));
 
 let server = app.listen(PORT);
 let io = socket(server);
+let points = []
 
 io.sockets.on('connection', (socket) => {
     console.log('new connection: ' + socket.id);
 
     socket.on('someoneDrew', (data) => {
+        points.push(data)
         socket.broadcast.emit('someoneDrew', data);
     })
 
-    socket.on('board setup', (gp) => {
-        io.to(socket.id).emit('board setup', gp);
-    })
+    io.to(socket.id).emit('load', points)
 
-    socket.broadcast.emit('new connection', socket.id)
+    socket.on('clear', (message) => {
+        points.length = 0;
+        socket.broadcast.emit('clear', message)
+    })
 })
 

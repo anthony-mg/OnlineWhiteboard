@@ -1,0 +1,7 @@
+body{
+    background-color: rgb(100, 100, 100);
+    display: flexbox;
+    text-align: center;
+}
+
+html, body {margin: 0; height: 100%; overflow: hidden}
