@@ -16,8 +16,8 @@ function setup() {
     createCanvas(windowWidth / 1.5, windowWidth / 1.5);
     background("#F");
 
-    //socket = io.connect('https://shareablewhiteboard.herokuapp.com/')
-    socket = io.connect('192.168.0.195:5000');
+    socket = io.connect('https://shareablewhiteboard.herokuapp.com/')
+    //socket = io.connect('192.168.0.195:5000');
 
     socket.on('someoneDrew', (data) => {
         if (data.incomingStroke == null)
