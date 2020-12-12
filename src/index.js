@@ -3,13 +3,14 @@ const socket = require('socket.io');
 const PORT = process.env.PORT || 5000;
 
 const app = express();
-app.use(express.static('public'));
-
 let server = app.listen(PORT);
 let io = socket(server);
+
+app.use(express.static('public'));
+
 let points = []
 
-io.sockets.on('connection', (socket) => {
+io.on('connection', (socket) => {
     console.log('new connection: ' + socket.id);
 
     socket.on('someoneDrew', (data) => {
@@ -17,11 +18,15 @@ io.sockets.on('connection', (socket) => {
         socket.broadcast.emit('someoneDrew', data);
     })
 
-    io.to(socket.id).emit('load', points)
-
     socket.on('clear', (message) => {
         points.length = 0;
         socket.broadcast.emit('clear', message)
     })
+
+    socket.on('load', (message) => {
+        io.to(socket.id).emit('load', points)
+    })
+
+    io.to(socket.id).emit('load', points)
 })
 

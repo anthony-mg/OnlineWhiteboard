@@ -4,4 +4,16 @@ body{
     text-align: center;
 }
 
-html, body {margin: 0; height: 100%; overflow: hidden}
+html, body {
+    margin: 0; height: 100%; overflow: hidden
+}
+
+div.wrap {
+    height:100%; 
+    overflow:hidden;
+}
+
+:root {
+    touch-action: pan-x pan-y;
+    height: 100% 
+  }

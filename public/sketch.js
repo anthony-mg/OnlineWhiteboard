@@ -5,6 +5,9 @@ let strokeW;
 
 
 function setup() {
+    /*========================================================================================================================
+                                                    Sketch Setup
+      ========================================================================================================================*/
     colorPic = createColorPicker('#000000');
     strokeSlider = createSlider(1, 11, 5, 1);
     button = createButton('clear')
@@ -13,11 +16,17 @@ function setup() {
         clear()
         background('#F')
     })
-    createCanvas(windowWidth / 1.5, windowWidth / 1.5);
+
+
+    let canvas = createCanvas(windowWidth / 1.3, windowHeight / 1.3);
+    canvas.parent('wrap')
     background("#F");
 
+    /*========================================================================================================================
+                                                    Socket Events
+      ========================================================================================================================*/
     socket = io.connect('https://shareablewhiteboard.herokuapp.com/')
-    //socket = io.connect('192.168.0.195:5000');
+    //socket = io.connect("192.168.0.195:5000");
 
     socket.on('someoneDrew', (data) => {
         if (data.incomingStroke == null)
@@ -33,7 +42,7 @@ function setup() {
         line(x, y, px, py)
     })
 
-    socket.once('load', data => {
+    socket.on('load', data => {
         loadWhiteboard(data);
     })
 
@@ -46,30 +55,30 @@ function setup() {
 }
 
 function draw() {
+    if (mouseX < width + 10 && mouseX > -10 && mouseY < height + 10 && mouseY > -10) {
+        if (mouseIsPressed) {
+            let data = {
+                x: mouseX,
+                y: mouseY,
+                px: pmouseX,
+                py: pmouseY,
+                incomingWidth: width,
+                incomingHeight: height,
+                incomingStroke: strokeW,
+                color: colorPic.color()
+            }
 
-    if (mouseIsPressed) {
-        let data = {
-            x: mouseX,
-            y: mouseY,
-            px: pmouseX,
-            py: pmouseY,
-            incomingWidth: width,
-            incomingHeight: height,
-            incomingStroke: strokeW,
-            color: colorPic.color()
+            socket.emit('someoneDrew', data);
+
+            strokeW = strokeSlider.value()
+            strokeWeight(strokeW);
+            stroke(colorPic.color())
+            line(mouseX, mouseY, pmouseX, pmouseY)
         }
-
-        socket.emit('someoneDrew', data);
-
-        strokeW = strokeSlider.value()
-        strokeWeight(strokeW);
-        stroke(colorPic.color())
-        line(mouseX, mouseY, pmouseX, pmouseY)
     }
 }
 
 function loadWhiteboard(dataPoints) {
-    console.log('loading')
     dataPoints.forEach(l => {
         let x = map(l.x, 0, l.incomingWidth, 0, width);
         let y = map(l.y, 0, l.incomingHeight, 0, height);
@@ -80,4 +89,10 @@ function loadWhiteboard(dataPoints) {
         stroke(...l.color.levels)
         line(x, y, px, py)
     })
+}
+
+function windowResized() {
+    resizeCanvas(windowWidth / 1.3, windowHeight / 1.3)
+    background('#F')
+    socket.emit('load', 'loading...')
 }
