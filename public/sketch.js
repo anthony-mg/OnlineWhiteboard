@@ -2,25 +2,32 @@ let socket;
 let color;
 let pointsPermanence = [];
 let strokeW;
+let erasing = false;
 
 
 function setup() {
     /*========================================================================================================================
                                                     Sketch Setup
       ========================================================================================================================*/
-    colorPic = createColorPicker('#000000');
-    strokeSlider = createSlider(1, 11, 5, 1);
-    button = createButton('clear')
-    button.mousePressed(() => {
+    colorPic = select('#colorPic')//createColorPicker('#000000');
+    strokeSlider = select('#sizeSlider')//createSlider(0, 50, 5, 5);
+
+    let clearButton = select('#clearButt')
+    clearButton.mousePressed(() => {
         socket.emit('clear', 'clearing screen...')
         clear()
         background('#F')
     })
 
+    let eraserToggle = select('#erase')
+    eraserToggle.mousePressed(() => {
+        eraserToggle.toggleClass('erase-alt')
+        erasing = !erasing;
+    })
 
-    let canvas = createCanvas(windowWidth / 1.3, windowHeight / 1.3);
-    canvas.parent('wrap')
-    background("#F");
+    let canvas = createCanvas(windowWidth / 1.5, windowHeight / 1.5);
+    canvas.parent('wrap', '')
+    background("#F")
 
     /*========================================================================================================================
                                                     Socket Events
@@ -52,27 +59,36 @@ function setup() {
         background('#F')
     })
 
+    select("#controls")
 }
 
 function draw() {
+
     if (mouseX < width + 10 && mouseX > -10 && mouseY < height + 10 && mouseY > -10) {
+        let c;
+        if (erasing)
+            c = this.color('#F')
+        else
+            c = this.color(colorPic.value())
+
         if (mouseIsPressed) {
             let data = {
                 x: mouseX,
                 y: mouseY,
                 px: pmouseX,
                 py: pmouseY,
+                erasing: erasing,
                 incomingWidth: width,
                 incomingHeight: height,
                 incomingStroke: strokeW,
-                color: colorPic.color()
+                color: c
             }
 
             socket.emit('someoneDrew', data);
 
             strokeW = strokeSlider.value()
             strokeWeight(strokeW);
-            stroke(colorPic.color())
+            stroke(c)
             line(mouseX, mouseY, pmouseX, pmouseY)
         }
     }
