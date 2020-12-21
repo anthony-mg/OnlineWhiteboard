@@ -36,11 +36,11 @@ export let sketch = (p) => {
         p.graphics = p.createGraphics(p.width, p.height)
         p.graphics.background("#F")
 
-        p.socket.on('clear', (message) => {
-            console.log(message);
-            p.graphics.clear()
-            p.graphics.background('#F')
-        })
+        // p.socket.on('clear', (message) => {
+        //     console.log(message);
+        //     p.graphics.clear()
+        //     p.graphics.background('#F')
+        // })
     }
 
     p.draw = () => {

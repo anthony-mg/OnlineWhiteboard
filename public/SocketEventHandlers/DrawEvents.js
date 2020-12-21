@@ -25,7 +25,9 @@ function someoneDrew(data) {
 }
 
 function clear() {
-
+    console.log(message);
+    this.graphics.clear()
+    this.graphics.background('#F')
 }
 
 function load(data) {
