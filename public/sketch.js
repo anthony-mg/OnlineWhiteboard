@@ -1,114 +1,89 @@
-let socket;
-let color;
-let pointsPermanence = [];
-let strokeW;
-let erasing = false;
+export let sketch = (p) => {
+    p5.disableFriendlyErrors = true;
+    p.graphics;
+    //p.socket = io('https://shareablewhiteboard.herokuapp.com/')
+    p.socket = io("192.168.0.195:5000");
+    p.x = 100;
+    p.color;
+    p.pointsPermanence = [];
+    p.strokeW;
+    p.erasing = false;
 
 
-function setup() {
-    /*========================================================================================================================
-                                                    Sketch Setup
-      ========================================================================================================================*/
-    colorPic = select('#colorPic')//createColorPicker('#000000');
-    strokeSlider = select('#sizeSlider')//createSlider(0, 50, 5, 5);
+    p.setup = () => {
+        /*========================================================================================================================
+                                                        Sketch Setup
+          ========================================================================================================================*/
+        p.colorPic = p.select('#colorPic')
+        p.strokeSlider = p.select('#sizeSlider')
+        p.clearButton = p.select('#clearButt')
 
-    let clearButton = select('#clearButt')
-    clearButton.mousePressed(() => {
-        socket.emit('clear', 'clearing screen...')
-        clear()
-        background('#F')
-    })
+        p.clearButton.mousePressed(() => {
+            p.socket.emit('clear', 'clearing screen...')
+            p.graphics.clear()
+            p.graphics.background('#F')
+        })
 
-    let eraserToggle = select('#erase')
-    eraserToggle.mousePressed(() => {
-        eraserToggle.toggleClass('erase-alt')
-        erasing = !erasing;
-    })
+        p.eraserToggle = p.select('#erase')
+        p.eraserToggle.mousePressed(() => {
+            p.eraserToggle.toggleClass('erase-alt')
+            p.erasing = !p.erasing;
+        })
 
-    let canvas = createCanvas(windowWidth / 1.5, windowHeight / 1.5);
-    canvas.parent('wrap', '')
-    background("#F")
+        p.canvas = p.createCanvas(p.windowWidth / 1.5, p.windowHeight / 1.5);
+        p.canvas.parent('wrap', '')
 
-    /*========================================================================================================================
-                                                    Socket Events
-      ========================================================================================================================*/
-    socket = io.connect('https://shareablewhiteboard.herokuapp.com/')
-    //socket = io.connect("192.168.0.195:5000");
+        p.graphics = p.createGraphics(p.width, p.height)
+        p.graphics.background("#F")
 
-    socket.on('someoneDrew', (data) => {
-        if (data.incomingStroke == null)
-            strokeWeight(1)
-        else
-            strokeWeight(data.incomingStroke)
+        p.socket.on('clear', (message) => {
+            console.log(message);
+            p.graphics.clear()
+            p.graphics.background('#F')
+        })
+    }
 
-        stroke(...data.color.levels)
-        let x = map(data.x, 0, data.incomingWidth, 0, width);
-        let y = map(data.y, 0, data.incomingHeight, 0, height);
-        let px = map(data.px, 0, data.incomingWidth, 0, width);
-        let py = map(data.py, 0, data.incomingHeight, 0, height);
-        line(x, y, px, py)
-    })
+    p.draw = () => {
 
-    socket.on('load', data => {
-        loadWhiteboard(data);
-    })
+        if (p.mouseX < p.width + 10 && p.mouseX > -10 && p.mouseY < p.height + 10 && p.mouseY > -10) {
+            let c;
+            if (p.erasing)
+                p.c = p.color('#F')
+            else
+                p.c = p.color(p.colorPic.value())
 
-    socket.on('clear', (message) => {
-        console.log(message);
-        clear()
-        background('#F')
-    })
+            if (p.mouseIsPressed) {
+                p.pixels[100] = 10
+                let data = {
+                    x: p.mouseX,
+                    y: p.mouseY,
+                    px: p.pmouseX,
+                    py: p.pmouseY,
+                    erasing: p.erasing,
+                    incomingWidth: p.width,
+                    incomingHeight: p.height,
+                    incomingStroke: p.strokeW,
+                    color: p.c
+                }
 
-    select("#controls")
-}
-
-function draw() {
-
-    if (mouseX < width + 10 && mouseX > -10 && mouseY < height + 10 && mouseY > -10) {
-        let c;
-        if (erasing)
-            c = this.color('#F')
-        else
-            c = this.color(colorPic.value())
-
-        if (mouseIsPressed) {
-            let data = {
-                x: mouseX,
-                y: mouseY,
-                px: pmouseX,
-                py: pmouseY,
-                erasing: erasing,
-                incomingWidth: width,
-                incomingHeight: height,
-                incomingStroke: strokeW,
-                color: c
+                p.socket.emit('someoneDrew', data);
+                p.strokeW = p.strokeSlider.value()
+                p.graphics.strokeWeight(p.strokeW);
+                p.graphics.stroke(p.c)
+                p.graphics.line(p.mouseX, p.mouseY, p.pmouseX, p.pmouseY)
             }
-
-            socket.emit('someoneDrew', data);
-
-            strokeW = strokeSlider.value()
-            strokeWeight(strokeW);
-            stroke(c)
-            line(mouseX, mouseY, pmouseX, pmouseY)
         }
+        p.image(p.graphics, 0, 0, p.width, p.height);
+        p.noFill()
+        p.ellipse(p.mouseX, p.mouseY, p.strokeSlider.value() + 5)
+    }
+
+
+    p.windowResized = () => {
+        p.graphics.resizeCanvas(p.windowWidth / 1.3, p.windowHeight / 1.3)
+        p.graphics.background('#F')
+        p.resizeCanvas(p.windowWidth / 1.3, p.windowHeight / 1.3)
+        p.socket.emit('load', 'loading...')
     }
 }
 
-function loadWhiteboard(dataPoints) {
-    dataPoints.forEach(l => {
-        let x = map(l.x, 0, l.incomingWidth, 0, width);
-        let y = map(l.y, 0, l.incomingHeight, 0, height);
-        let px = map(l.px, 0, l.incomingWidth, 0, width);
-        let py = map(l.py, 0, l.incomingHeight, 0, height);
-
-        strokeWeight(l.incomingStroke)
-        stroke(...l.color.levels)
-        line(x, y, px, py)
-    })
-}
-
-function windowResized() {
-    resizeCanvas(windowWidth / 1.3, windowHeight / 1.3)
-    background('#F')
-    socket.emit('load', 'loading...')
-}

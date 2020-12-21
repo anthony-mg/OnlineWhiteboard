@@ -15,9 +15,7 @@ html, body {
     padding-left: 1.5vw;
     padding-top: 1.5vw;
 }
-#wrap{
-   
-}
+
 #clearButt{
     float:right;
 }
@@ -41,10 +39,10 @@ html, body {
  }
 
 button img{
-    width:2vw;
-    height:2vw;
+    width:3vw;
+    height:3vw;
 }
 
  .p5Canvas{
-    cursor:crosshair;
+    cursor: crosshair;
  }
