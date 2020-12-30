@@ -1,14 +1,25 @@
+*{
+    margin:0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
 body{
     display: flexbox;
     flex-direction: row;
     justify-content: center;
     background-color: #bbbcb6 !important;
+    font-family: 'Poppins', sans-serif;
 } 
 html, body {
     margin: 0; height: 100%; overflow: hidden;
     touch-action: pan-x pan-y;
     height: 100%;
 }
+/* 
+.p5Canvas{
+    cursor: crosshair;
+ } */
+
 #content{
     display: inline-block;
     flex-direction: column;
@@ -16,19 +27,37 @@ html, body {
     padding-top: 1.5vw;
 }
 
-#clearButt{
-    float:right;
+#controls{
+    display: flex;
+    justify-content: space-around;
+}
+#colorPic{
+    border:0px
+}
+.flex-controls{
+    display: flex;
+    align-items: center;
+}
+.flex-controls label{
+    padding: 1vw;
 }
  button.erase-alt{
      background: #fdcc0d !important;
      color: #FFF;
  }
 
- button{
+ button {
      background-color: #FFF !important;
-     border-radius: 1em;
-     border: 2px solid #fdcc0d !important;
+     border: 2px solid #fdcc0d;
+     width: 3em;
+     height: 3em;
+     border-radius: 50%;
  }
+
+ button img{
+    width:100%;
+    height:100%;
+}
 
  .no-select{
     user-select: none;
@@ -38,11 +67,4 @@ html, body {
     -o-user-select: none;
  }
 
-button img{
-    width:3vw;
-    height:3vw;
-}
 
- .p5Canvas{
-    cursor: crosshair;
- }
