@@ -20,6 +20,7 @@
   "homepage": "https://github.com/anthony-mg/OnlineWhiteboard#readme",
   "dependencies": {
     "express": "^4.17.1",
+    "express-session": "^1.17.1",
     "p5": "^1.1.9",
     "socket.io": "^3.0.4"
   },

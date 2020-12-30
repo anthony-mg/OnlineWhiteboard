@@ -1,5 +1,6 @@
 const express = require('express');
 const socket = require('socket.io');
+const expressSession = require('express-session')
 const mainRoutes = require('./routes/mainRoutes')
 const PORT = process.env.PORT || 5000;
 
@@ -8,7 +9,13 @@ let server = app.listen(PORT);
 let io = socket(server);
 
 app.use(express.static('public'));
+app.use(express.urlencoded({
+    extended: true
+}));
+
+app.use(expressSession({ secret: 'your secret', saveUninitialized: true, resave: false }));
 app.use(mainRoutes);
+
 
 
 let points = []

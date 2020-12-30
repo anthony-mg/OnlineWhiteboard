@@ -1,4 +1,4 @@
-import { sketch } from './sketch.js';
+import { sketch } from './board.js';
 import { SocketDrawEvents } from './SocketEventHandlers/SocketDrawEvents.js';
 import { P5Events } from './DrawingEventHandlers/p5Events.js'
 let p5Sketch = new p5(sketch)

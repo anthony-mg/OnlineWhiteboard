@@ -3,34 +3,30 @@
 
     <head>
         <meta charset="UTF-8">
-        <meta name="viewport" content="user-scalable=no, initial-scale=1, width=device-width, height=device-height" />
-        <script src=" https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.0.4/socket.io.js"></script>
-        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="styles/mainStyle.css">
+        <title>Tony's Whiteboard</title>
         <script src="https://cdn.jsdelivr.net/npm/p5@1.1.9/lib/p5.js"></script>
-        <script type='module' src="./main.js"></script>
-        <link rel="stylesheet" href="styles/style.css">
+        <script src="./index.js"></script>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
             integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
-        <title>Wowza</title>
     </head>
 
-    <body class="no-select">
-        <div id="content">
-            <div id="wrap"></div>
-            <div class="no-select" id="controls">
-                <button class="no-select" type="button" id='erase' class="btn btn-outline-warning"><img
-                        src="https://www.flaticon.com/svg/static/icons/svg/1203/1203953.svg"></button>
-
-                <div class="flex-controls">
-                    <label for="sizeSlider">Stroke Size:</label>
-                    <input name="sizeSlider" class="no-select" id='sizeSlider' type="range" min="1" max="31" step="1"
-                        value="1">
-                </div>
-                <div class="flex-controls">
-                    <label for="colorPic">Color:</label>
-                    <input name="colorPic" class="no-select" id='colorPic' type="color">
-                </div>
+    <body>
+        <main>
+            <div class="no-select" id="canvasWrap"></div>
+            <h1 class="no-select">Tony's Whiteboard</h1>
+            <form method="POST" action="/board" class="nicknameForm no-select" autocomplete="off">
+                <label class="no-select" for="nicknameInput">
+                    <h3 class="no-select">Enter a Nickname</h3>
+                </label>
+                <br>
+                <input class="no-select" maxlength="18" type="text" name="nickname" id="nicknameInput">
+                <br>
+                <input type="submit" class="btn-sm btn btn-dark submitBut">
+            </form>
+        </main>
     </body>
 
 </html>

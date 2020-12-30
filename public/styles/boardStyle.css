@@ -10,15 +10,12 @@ body{
     background-color: #bbbcb6 !important;
     font-family: 'Poppins', sans-serif;
 } 
+
 html, body {
     margin: 0; height: 100%; overflow: hidden;
     touch-action: pan-x pan-y;
     height: 100%;
 }
-/* 
-.p5Canvas{
-    cursor: crosshair;
- } */
 
 #content{
     display: inline-block;
