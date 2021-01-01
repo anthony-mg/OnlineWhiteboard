@@ -1,7 +1,7 @@
 export let sketch = (p) => {
     p5.disableFriendlyErrors = true;
-    //p.socket = io('https://shareablewhiteboard.herokuapp.com/');
-    p.socket = io("192.168.0.195:5000");
+    p.socket = io('https://shareablewhiteboard.herokuapp.com/');
+    //p.socket = io("192.168.0.195:5000");
     p.color;
     p.strokeW;
     p.erasing = false;
