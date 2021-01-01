@@ -5,6 +5,9 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="styles/reset.css">
         <link rel="stylesheet" href="styles/mainStyle.css">
         <title>Tony's Whiteboard</title>
         <script src="https://cdn.jsdelivr.net/npm/p5@1.1.9/lib/p5.js"></script>
@@ -16,7 +19,7 @@
     <body>
         <main>
             <div class="no-select" id="canvasWrap"></div>
-            <h1 class="no-select">Tony's Whiteboard</h1>
+            <h1 class="no-select">Online Whiteboard</h1>
             <form method="POST" action="/board" class="nicknameForm no-select" autocomplete="off">
                 <label class="no-select" for="nicknameInput">
                     <h3 class="no-select">Enter a Nickname</h3>
@@ -24,7 +27,7 @@
                 <br>
                 <input class="no-select" maxlength="18" type="text" name="nickname" id="nicknameInput">
                 <br>
-                <input type="submit" class="btn-sm btn btn-dark submitBut">
+                <input type="submit" value="Coninue" class="btn-sm btn btn-dark submitBut">
             </form>
         </main>
     </body>

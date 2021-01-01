@@ -1,18 +1,22 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 *{
     margin:0px;
     padding: 0px;
     box-sizing: border-box;
+    font-family: 'Press Start 2P', cursive !important;
 }
 body{
     display: flexbox;
     flex-direction: row;
     justify-content: center;
     background-color: #bbbcb6 !important;
-    font-family: 'Poppins', sans-serif;
+    font-family:'Hanalei Fill', cursive;
 } 
 
 html, body {
-    margin: 0; height: 100%; overflow: hidden;
+    margin: 0; 
+    overflow: hidden;
     touch-action: pan-x pan-y;
     height: 100%;
 }

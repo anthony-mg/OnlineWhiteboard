@@ -3,7 +3,7 @@ export let P5Events = function (p5Sketch) {
     p5Sketch.windowResized = () => {
         p5Sketch.resizeCanvas(p5Sketch.windowWidth / 1.3, p5Sketch.windowHeight / 1.3);
         p5Sketch.background('#F');
-        p5Sketch.socket.emit('load', 'loading...');
+        p5Sketch.socket.emit('load', 'window rezied...');
     }
 
     p5Sketch.mouseWheel = (event) => {
@@ -15,7 +15,7 @@ export let P5Events = function (p5Sketch) {
                 p5Sketch.applyZoomScale(0.90);
             }
             p5Sketch.background('#F');
-            p5Sketch.socket.emit('load', 'loading...');
+            p5Sketch.socket.emit('load', 'zooming...');
             return false;
         }
     }
@@ -26,11 +26,11 @@ export let P5Events = function (p5Sketch) {
         p5Sketch.translateY = p5Sketch.mouseY * (1 - s) + p5Sketch.translateY * s;
     }
 
-    document.querySelector('#wrap').addEventListener('grabbing', () => {
+    document.querySelector('#wrap').addEventListener('panning', () => {
         if (p5Sketch.panning) {
             p5Sketch.translateX += (p5Sketch.width / 2 - p5Sketch.mouseX) * .05;
             p5Sketch.translateY += (p5Sketch.height / 2 - p5Sketch.mouseY) * .05;
-            p5Sketch.socket.emit('load', 'loading...');
+            p5Sketch.socket.emit('load', 'panning...');
         }
     })
 

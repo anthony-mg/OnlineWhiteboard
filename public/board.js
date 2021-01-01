@@ -69,8 +69,8 @@ export let sketch = (p) => {
                 p.select('#wrap').style('cursor: grab')
                 if (p.mouseIsPressed) {
                     p.select('#wrap').style('cursor: move')
-                    let event = new CustomEvent('grabbing')
-                    document.querySelector('#wrap').dispatchEvent(event);
+                    let panningEvent = new CustomEvent('panning')
+                    document.querySelector('#wrap').dispatchEvent(panningEvent);
                 }
             }
         }

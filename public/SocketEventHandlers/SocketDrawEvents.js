@@ -23,17 +23,16 @@ function someoneDrew(data) {
 }
 
 
-
 function load(data) {
     this.background('#F')
-    data.forEach(l => {
-        let x = this.map(l.x, 0, l.incomingWidth, 0, this.width);
-        let y = this.map(l.y, 0, l.incomingHeight, 0, this.height);
-        let px = this.map(l.px, 0, l.incomingWidth, 0, this.width);
-        let py = this.map(l.py, 0, l.incomingHeight, 0, this.height);
+    data.forEach(incomingPoint => {
+        let x = this.map(incomingPoint.x, 0, incomingPoint.incomingWidth, 0, this.width);
+        let y = this.map(incomingPoint.y, 0, incomingPoint.incomingHeight, 0, this.height);
+        let px = this.map(incomingPoint.px, 0, incomingPoint.incomingWidth, 0, this.width);
+        let py = this.map(incomingPoint.py, 0, incomingPoint.incomingHeight, 0, this.height);
 
-        this.strokeWeight(l.incomingStroke)
-        this.stroke(...l.color.levels)
+        this.strokeWeight(incomingPoint.incomingStroke)
+        this.stroke(...incomingPoint.color.levels)
         this.line(x, y, px, py)
     })
 }

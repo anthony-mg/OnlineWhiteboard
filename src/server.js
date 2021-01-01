@@ -16,8 +16,6 @@ app.use(express.urlencoded({
 app.use(expressSession({ secret: 'your secret', saveUninitialized: true, resave: false }));
 app.use(mainRoutes);
 
-
-
 let points = []
 io.on('connection', (socket) => {
     console.log('new connection: ' + socket.id);
