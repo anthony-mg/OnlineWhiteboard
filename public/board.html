@@ -18,14 +18,17 @@
     <body class="no-select">
         <div id="content">
             <div class="no-select" id="controls">
-                <button class="no-select flex-controls" type="button" id='erase' class="btn btn-outline-warning"><img
-                        src="https://www.flaticon.com/svg/static/icons/svg/1203/1203953.svg"></button>
-                <div class="flex-controls">
+                <div class="flex-control">
+                    <button class="no-select" type="button" id='erase' class="btn btn-outline-warning"
+                        onclick='this.blur();'><img
+                            src="https://www.flaticon.com/svg/static/icons/svg/1203/1203953.svg"></button>
+                </div>
+                <div class="flex-control">
                     <label for="sizeSlider">Stroke Size:</label>
                     <input name="sizeSlider" class="no-select" id='sizeSlider' type="range" min="1" max="31" step="1"
                         value="1">
                 </div>
-                <div class="flex-controls">
+                <div class="flex-control">
                     <label for="colorPic">Color:</label>
                     <input name="colorPic" class="no-select" id='colorPic' type="color">
                 </div>

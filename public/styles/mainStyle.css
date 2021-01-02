@@ -21,6 +21,7 @@ h1{
     margin-top:10% !important;
     display: flex;
     justify-content: center;
+    text-align: center;
     width: 100%;
 }
 

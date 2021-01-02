@@ -21,42 +21,61 @@ html, body {
     height: 100%;
 }
 #wrap{
-    margin-top: 10vh;
+    margin-top: 14vh;
+    text-align: center;
 }
 
 #content{
     display: block;
     flex-direction: column;
-    padding-left: 1.5vw;
-    padding-top: 1.5vw;
 }
 
 #controls{
     display: flex;
-    justify-content: start;
+    justify-content: space-between;
     align-items: center;
+    position: absolute;
+    top: 0px;
+    left:0px;
+    background-color: #585858;
+    padding:10px;
+    width: 100%;
+    color: #efefef;
 }
+
+#controls input,button{
+    cursor: pointer;
+    width: 25vw !important;
+}
+
 #colorPic{
     border:0px
 }
-.flex-controls{
+.flex-control{
     display: flex;
     align-items: center;
+
 }
-.flex-controls label{
+.flex-control label{
     padding: 1vw;
+    font-size: 1vw;
 }
+
  button.erase-alt{
+
      background: #fdcc0d !important;
      color: #FFF;
  }
 
  button {
      background-color: #FFF !important;
-     border: 2px solid #fdcc0d;
-     width: 3em;
-     height: 3em;
-     border-radius: 50%;
+     border: none;
+     width: 2em;
+     height: 2em;
+ }
+ button:active:focus{
+     border:none;
+     box-shadow:none;
  }
 
  button img{

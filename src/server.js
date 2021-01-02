@@ -8,13 +8,14 @@ const app = express();
 let server = app.listen(PORT);
 let io = socket(server);
 
-app.use(express.static('public'));
+
 app.use(express.urlencoded({
     extended: true
 }));
 
 app.use(expressSession({ secret: 'your secret', saveUninitialized: true, resave: false }));
 app.use(mainRoutes);
+app.use(express.static('public'));
 
 let points = []
 io.on('connection', (socket) => {

@@ -6,7 +6,7 @@ export let sketch = (p) => {
     p.strokeW;
     p.erasing = false;
     p.panning = false;
-    p.touchDistance = 0;
+    p.cursor;
     p.scaleFactor = 1;
     p.translateX = 0;
     p.translateY = 0;
@@ -22,6 +22,7 @@ export let sketch = (p) => {
 
         p.eraserToggle = p.select('#erase');
         p.eraserToggle.mousePressed(() => {
+            p.select('#wrap').style('cursor: grabbing')
             p.eraserToggle.toggleClass('erase-alt')
             p.erasing = !p.erasing;
         });
@@ -32,6 +33,7 @@ export let sketch = (p) => {
 
         p.background('#F');
         p.line(0, 0, p.with, p.height);
+
     }
 
     p.draw = () => {

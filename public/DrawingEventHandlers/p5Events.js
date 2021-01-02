@@ -22,6 +22,10 @@ export let P5Events = function (p5Sketch) {
 
     p5Sketch.applyZoomScale = (s) => {
         p5Sketch.scaleFactor *= s;
+        p5Sketch.scaleFactor = p5Sketch.min(p5Sketch.max(.25, p5Sketch.scaleFactor), 30)
+        if (p5Sketch.scaleFactor == .25 || p5Sketch.scaleFactor == 30) {
+            return;
+        }
         p5Sketch.translateX = p5Sketch.mouseX * (1 - s) + p5Sketch.translateX * s;
         p5Sketch.translateY = p5Sketch.mouseY * (1 - s) + p5Sketch.translateY * s;
     }
@@ -42,6 +46,7 @@ export let P5Events = function (p5Sketch) {
 
     p5Sketch.keyReleased = () => {
         if (p5Sketch.keyCode == 17) {
+            p5Sketch.select('#wrap').style('cursor: crosshair');
             p5Sketch.panning = false
         }
     }
