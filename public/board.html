@@ -19,8 +19,7 @@
         <div id="content">
             <div class="no-select" id="controls">
                 <div class="flex-control">
-                    <button class="no-select" type="button" id='erase' class="btn btn-outline-warning"
-                        onclick='this.blur();'><img
+                    <button id="erase" type="button" class="no-select btn erase" onclick='this.blur();'><img
                             src="https://www.flaticon.com/svg/static/icons/svg/1203/1203953.svg"></button>
                 </div>
                 <div class="flex-control">
@@ -34,6 +33,18 @@
                 </div>
             </div>
             <div id="wrap"></div>
+            <div class="chat-history">
+                <div class="message-container">
+
+                </div>
+                <form class="message-form">
+                    <input autocomplete="off" name="msg" class="message-input" type="text">
+                    <button class="btn-sm btn btn-dark sendBut">Send</button>
+                </form>
+            </div>
+            <div id="chat-controls-container" class="navbar fixed-bottom">
+                <button class="chat-button btn">Chat</button>
+            </div>
     </body>
 
 </html>

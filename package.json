@@ -19,8 +19,10 @@
   },
   "homepage": "https://github.com/anthony-mg/OnlineWhiteboard#readme",
   "dependencies": {
+    "escape-html": "^1.0.3",
     "express": "^4.17.1",
     "express-session": "^1.17.1",
+    "moment": "^2.29.1",
     "p5": "^1.1.9",
     "socket.io": "^3.0.4"
   },

@@ -1,14 +1,37 @@
 export let P5Events = function (p5Sketch) {
 
+    document.querySelector('.erase').addEventListener('click', (event) => {
+        p5Sketch.select('.erase').toggleClass('button-clicked-alt')
+        p5Sketch.select('#wrap').toggleClass('eraser-cursor-toggle');
+        p5Sketch.erasing = !p5Sketch.erasing;
+    });
+
+    document.querySelector('.chat-button').addEventListener('click', (event) => {
+        event.target.classList.toggle('button-clicked-alt');
+        document.querySelector('.chat-history').classList.toggle('chat-history-display-toggle')
+    });
+
+    document.querySelector('.message-form').addEventListener('submit', (event) => {
+        event.preventDefault();
+        const message = event.target.elements.msg.value;
+        if (message === '') {
+            return;
+        }
+        p5Sketch.socket.emit('message', message);
+        event.target.elements.msg.value = '';
+        event.target.elements.msg.focus();
+    })
+
     p5Sketch.windowResized = () => {
         p5Sketch.resizeCanvas(p5Sketch.windowWidth / 1.3, p5Sketch.windowHeight / 1.3);
         p5Sketch.background('#F');
         p5Sketch.socket.emit('load', 'window rezied...');
     }
 
-    p5Sketch.mouseWheel = (event) => {
+    document.querySelector('#wrap').addEventListener('wheel', (event) => {
+
         if (p5Sketch.mouseX < p5Sketch.width && p5Sketch.mouseX > 0 && p5Sketch.mouseY < p5Sketch.height && p5Sketch.mouseY > 0) {
-            if (event.delta < 0) {
+            if (event.deltaY < 0) {
                 p5Sketch.applyZoomScale(1.10);
             }
             else {
@@ -18,7 +41,7 @@ export let P5Events = function (p5Sketch) {
             p5Sketch.socket.emit('load', 'zooming...');
             return false;
         }
-    }
+    });
 
     p5Sketch.applyZoomScale = (s) => {
         p5Sketch.scaleFactor *= s;
@@ -50,4 +73,5 @@ export let P5Events = function (p5Sketch) {
             p5Sketch.panning = false
         }
     }
+
 }

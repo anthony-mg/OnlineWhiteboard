@@ -20,9 +20,28 @@ html, body {
     touch-action: pan-x pan-y;
     height: 100%;
 }
+
+.message-container::-webkit-scrollbar {
+    width: 1em;
+  }
+   
+  .message-container::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  }
+   
+  .message-container::-webkit-scrollbar-thumb {
+    background-color: #fdcc0d;
+    outline: 1px solid slategrey;
+  }
+
+#wrap.eraser-cursor-toggle{
+    cursor: url(https://img.icons8.com/metro/26/000000/eraser.png) 14 14, auto; 
+}
+
 #wrap{
     margin-top: 14vh;
     text-align: center;
+    cursor:crosshair;
 }
 
 #content{
@@ -41,9 +60,10 @@ html, body {
     padding:10px;
     width: 100%;
     color: #efefef;
+    border: 3px solid black;
 }
 
-#controls input,button{
+#controls input,#controls button{
     cursor: pointer;
     width: 25vw !important;
 }
@@ -51,6 +71,7 @@ html, body {
 #colorPic{
     border:0px
 }
+
 .flex-control{
     display: flex;
     align-items: center;
@@ -61,28 +82,109 @@ html, body {
     font-size: 1vw;
 }
 
- button.erase-alt{
+#chat-controls-container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    bottom: 0px;
+    left: 0px;
+    width: 100%;
+    height:6vh;
+    padding: 0px;
+    background-color: #585858;
+    border: 3px solid black;
+}
+.message-form{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50vw;
+}
 
+.message-form input{
+    margin-right: 5px;
+    margin-left: 5px;
+}
+
+.message-input{
+    width: 30vw;
+}
+
+.chat-button{
+    float: left;
+    color: black !important;
+    background-color: white !important;
+}
+
+.chat-history{
+    display:none;
+    flex-direction: column;
+    background-color: #585858;
+    position: absolute;
+    height: 60vh;
+    width: 50vw;
+    bottom:6vh;
+    border-top-left-radius:25px;
+    border-top-right-radius:25px;
+    border: 3px solid black;
+    border-bottom: 0px;
+}
+
+.chat-history-display-toggle{
+    display: flex; 
+}
+
+.message-container{
+    width: 90%;
+    height:90%;
+    background-color: #999999;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-y: scroll;
+}
+
+.message{
+    width: 94%;
+    height: min-content;
+    background-color: #fdcc0d;
+    color: black;
+    border: 1px solid black;
+    border-radius: 7px;
+    font-size: .45em;
+    padding: 0vw 1vw;
+    margin-top: 1vh;
+}
+
+.message .meta{
+    color: #585858;
+}
+
+.message *{
+    margin: 5px;
+}
+
+.erase{
+    background-color: #FFF !important;
+    border: none;
+    width: 2em;
+    height: 2em;
+}
+
+.button-clicked-alt{
      background: #fdcc0d !important;
-     color: #FFF;
  }
 
- button {
-     background-color: #FFF !important;
-     border: none;
-     width: 2em;
-     height: 2em;
- }
- button:active:focus{
+ .erase:active:focus{
      border:none;
      box-shadow:none;
  }
 
- button img{
+ .erase img{
     width:100%;
     height:100%;
 }
-
  .no-select{
     user-select: none;
     -moz-user-select: none;

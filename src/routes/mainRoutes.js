@@ -14,9 +14,11 @@ router.post('/board', (req, res, next) => {
         return;
     }
     req.session.nickname = req.body.nickname;
+    req.app.session = req.session;
     console.log(req.session.nickname)
     if (req.session.nickname === null) {
         res.redirect('/');
+        return;
     }
     res.sendFile(path.join(__dirname, '../../public', 'board.html'));
 })

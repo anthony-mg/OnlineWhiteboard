@@ -1,5 +1,6 @@
 import { sketch } from './board.js';
 import { SocketDrawEvents } from './SocketEventHandlers/SocketDrawEvents.js';
+import { SocketMessageEvents } from './SocketEventHandlers/SocketMessageEvents.js'
 import { P5Events } from './DrawingEventHandlers/p5Events.js'
 let p5Sketch = new p5(sketch)
 
@@ -7,7 +8,8 @@ P5Events(p5Sketch)
 
 p5Sketch.socket.on('connect', () => {
     var eventHandlers = {
-        DrawEvents: new SocketDrawEvents(p5Sketch)
+        DrawEvents: new SocketDrawEvents(p5Sketch),
+        MessageEvents: new SocketMessageEvents()
     }
 
     for (let category in eventHandlers) {
