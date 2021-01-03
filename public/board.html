@@ -8,6 +8,18 @@
         <script src=" https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.0.4/socket.io.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/p5@1.1.9/lib/p5.js"></script>
         <script type='module' src="./main.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/qs/6.9.4/qs.min.js"
+            integrity="sha512-BHtomM5XDcUy7tDNcrcX1Eh0RogdWiMdXl3wJcKB3PFekXb3l5aDzymaTher61u6vEZySnoC/SAj2Y/p918Y3w=="
+            crossorigin="anonymous"></script>
+        <script>
+            function pressed(e) {
+                if ((window.event ? event.keyCode : e.which) == 13) {
+                    event.preventDefault();
+                    document.forms[0].dispatchEvent(new Event('submit'))
+                }
+            }
+        </script>
+
         <link rel="stylesheet" href="styles/reset.css">
         <link rel="stylesheet" href="styles/boardStyle.css">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -34,11 +46,10 @@
             </div>
             <div id="wrap"></div>
             <div class="chat-history">
-                <div class="message-container">
-
-                </div>
+                <div class="message-container"></div>
                 <form class="message-form">
-                    <input autocomplete="off" name="msg" class="message-input" type="text">
+                    <textarea onkeydown="pressed(event)" rows='3' maxlength="256" name="msg"
+                        class="message-input"></textarea>
                     <button class="btn-sm btn btn-dark sendBut">Send</button>
                 </form>
             </div>

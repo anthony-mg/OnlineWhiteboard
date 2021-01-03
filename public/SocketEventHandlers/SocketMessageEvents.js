@@ -22,7 +22,6 @@ function message(message) {
 
 function loadMessages(messages) {
     for (let i = 0; i < messages.length; i++) {
-        console.log(message[i])
         this.outputMessage(messages[i])
     }
     this.messageContainer.scrollTop = this.messageContainer.scrollHeight;

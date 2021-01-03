@@ -1,3 +1,6 @@
+const { nickname } = Qs.parse(location.search, {
+    ignoreQueryPrefix: true
+})
 export let P5Events = function (p5Sketch) {
 
     document.querySelector('.erase').addEventListener('click', (event) => {
@@ -9,6 +12,7 @@ export let P5Events = function (p5Sketch) {
     document.querySelector('.chat-button').addEventListener('click', (event) => {
         event.target.classList.toggle('button-clicked-alt');
         document.querySelector('.chat-history').classList.toggle('chat-history-display-toggle')
+        document.querySelector('.message-container').scrollTop = document.querySelector('.message-container').scrollHeight;
     });
 
     document.querySelector('.message-form').addEventListener('submit', (event) => {
@@ -17,7 +21,8 @@ export let P5Events = function (p5Sketch) {
         if (message === '') {
             return;
         }
-        p5Sketch.socket.emit('message', message);
+
+        p5Sketch.socket.emit('message', { text: message, nickname });
         event.target.elements.msg.value = '';
         event.target.elements.msg.focus();
     })

@@ -1,6 +1,5 @@
 const express = require('express');
 const socket = require('socket.io');
-const expressSession = require('express-session')
 const mainRoutes = require('./routes/mainRoutes')
 const MessageBuilder = require('./MessageBuilder.js');
 const PORT = process.env.PORT || 5000;
@@ -12,18 +11,22 @@ app.use(express.urlencoded({
     extended: true
 }));
 
-app.use(expressSession({ secret: '!()@*AKL23KAD)!', saveUninitialized: true, resave: false }));
 app.use(mainRoutes);
 app.use(express.static('public'));
 
 let points = []
 let messages = []
+let users = {};
 
 io.on('connection', (socket) => {
     console.log('new connection: ' + socket.id);
 
     socket.on('disconnect', (reason) => {
         console.log(`disconecting: ${socket.id}\n\t because: ${reason}`);
+        let systemMessage = MessageBuilder.formatServerMessage(`${users[socket.id]} has left.`);
+        delete users[socket.id];
+        messages.push(systemMessage);
+        io.emit('message', systemMessage);
     })
     socket.on('someoneDrew', (data) => {
         points.push(data)
@@ -35,9 +38,8 @@ io.on('connection', (socket) => {
     })
 
     socket.on('message', (message) => {
-        formattedMessage = MessageBuilder.formatUserMessage(app.session.nickname, message);
+        formattedMessage = MessageBuilder.formatUserMessage(message.nickname, message.text);
         messages.push(formattedMessage);
-        console.log(messages)
         io.emit('message', formattedMessage);
     })
 
@@ -45,11 +47,19 @@ io.on('connection', (socket) => {
         io.to(socket.id).emit('loadMessages', messages);
     })
 
-    let systemMessage = MessageBuilder.formatServerMessage(`${app.session.nickname} has joined! Welcome :^)`)
-    messages.push(systemMessage);
-    socket.broadcast.emit('message', systemMessage);
-    io.to(socket.id).emit('load', points)
-    io.to(socket.id).emit('loadMessages', messages);
+    socket.on('connected', (nickname) => {
+        users[socket.id] = nickname;
+        let systemMessage = MessageBuilder.formatServerMessage(`${nickname} has joined! Welcome :^)`);
+        messages.push(systemMessage);
+        socket.broadcast.emit('message', systemMessage);
+        io.to(socket.id).emit('loadMessages', messages);
+    })
+
+    socket.on('disconnect', (reason) => {
+
+    })
+
+    io.to(socket.id).emit('load', points);
 })
 
 
