@@ -5,6 +5,7 @@ export let sketch = (p) => {
         transports: ['websocket'],
         upgrade: false
     });
+
     // p.socket = io("192.168.0.195:5000", {
     //     reconnection: false,
     //     transports: ['websocket'],
