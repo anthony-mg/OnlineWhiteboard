@@ -18,6 +18,7 @@ export let sketch = (p) => {
     p.scaleFactor = 1;
     p.translateX = 0;
     p.translateY = 0;
+    p.topLeftAndBottomRightCorners = [];
 
     p.setup = () => {
 
@@ -30,6 +31,9 @@ export let sketch = (p) => {
         p.canvas.parent('wrap', '');
         p.canvas.addClass("no-select")
         p.background('#F');
+        p.topLeftAndBottomRightCorners = [[(p.translateX / p.scaleFactor), (p.translateY / p.scaleFactor)]
+            , [((p.width + p.translateX) / p.scaleFactor), ((p.translateY + p.height) / p.scaleFactor)]]
+
     }
 
     p.draw = () => {
@@ -38,7 +42,6 @@ export let sketch = (p) => {
 
         if (p.mouseX < p.width + 10 && p.mouseX > -10 && p.mouseY < p.height + 10 && p.mouseY > -10) {
             if (!p.panning) {
-                //p.select('#wrap').style('cursor: crosshair')
                 if (p.erasing)
                     p.c = p.color('#F');
                 else

@@ -19,7 +19,13 @@ function someoneDrew(data) {
     let y = this.map(data.y, 0, data.incomingHeight, 0, this.height);
     let px = this.map(data.px, 0, data.incomingWidth, 0, this.width);
     let py = this.map(data.py, 0, data.incomingHeight, 0, this.height);
-    this.line(x, y, px, py)
+
+    console.log(inDrawingRange(x, y, px, py, this.topLeftAndBottomRightCorners))
+    if (inDrawingRange(x, y, px, py, this.topLeftAndBottomRightCorners)) {
+        this.line(x, y, px, py)
+    } else {
+        console.log('fuck you!')
+    }
 }
 
 
@@ -33,6 +39,18 @@ function load(data) {
 
         this.strokeWeight(incomingPoint.incomingStroke)
         this.stroke(...incomingPoint.color.levels)
-        this.line(x, y, px, py)
+        if (inDrawingRange(x, y, px, py, this.topLeftAndBottomRightCorners)) {
+            this.line(x, y, px, py)
+        }
     })
+
+}
+
+function inDrawingRange(x, y, px, py, twoDiagonalCorners) {
+    let leniencyOffset = 2;
+    twoDiagonalCorners[0][0] -= leniencyOffset;
+    twoDiagonalCorners[0][1] -= leniencyOffset;
+    twoDiagonalCorners[1][0] += leniencyOffset;
+    twoDiagonalCorners[1][1] += leniencyOffset;
+    return (x > twoDiagonalCorners[0][0] && x < twoDiagonalCorners[1][0] && y > twoDiagonalCorners[0][1] && y < twoDiagonalCorners[1][1] && px > twoDiagonalCorners[0][0] && px < twoDiagonalCorners[1][0] && py > twoDiagonalCorners[0][1] && py < twoDiagonalCorners[1][1])
 }
