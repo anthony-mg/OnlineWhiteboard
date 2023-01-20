@@ -20,13 +20,13 @@
   "homepage": "https://github.com/anthony-mg/OnlineWhiteboard#readme",
   "dependencies": {
     "escape-html": "^1.0.3",
-    "express": "^4.17.1",
+    "express": "^4.18.2",
     "express-session": "^1.17.1",
-    "moment": "^2.29.1",
-    "qs": "^6.7.0",
+    "moment": "^2.29.4",
+    "qs": "^6.11.0",
     "socket.io": "^3.0.4"
   },
   "devDependencies": {
-    "nodemon": "^2.0.6"
+    "nodemon": "^2.0.20"
   }
 }
