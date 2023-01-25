@@ -2,3 +2,6 @@
 
 This is an interactive whiteboard which connects users using socket.io. Choose a nickname, connect with your friends, and start drawing and chatting  
 
+
+Access it here: http://100.25.3.244:3100/
+
