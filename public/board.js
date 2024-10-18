@@ -1,17 +1,11 @@
 export let sketch = (p) => {
   p5.disableFriendlyErrors = true;
-  //https://shareablewhiteboard.herokuapp.com/
-  p.socket = io("100.25.3.244:3100", {
+  p.socket = io("0.0.0.0:3100", {
     reconnection: false,
     transports: ["websocket"],
     upgrade: false,
   });
 
-  // p.socket = io("192.168.0.195:5000", {
-  //     reconnection: false,
-  //     transports: ['websocket'],
-  //     upgrade: false
-  // });
   p.color;
   p.strokeW;
   p.erasing = false;
