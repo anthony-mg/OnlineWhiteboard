@@ -19,7 +19,7 @@
 ![image](https://github.com/user-attachments/assets/21054b8c-a9c7-4ea1-8b3a-c58f69d6a103)
 
 
-Here's a blank template to get started: To avoid retyping too much info. Do a search and replace with your text editor for the following: `github_username`, `repo_name`, `twitter_handle`, `linkedin_username`, `email_client`, `email`, `project_title`, `project_description`
+An Online, share-state whiteboard. Currently only has 1 room availble.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -52,3 +52,8 @@ This is an example of how to list things you need to use the software and how to
   ```
 4. To go localhost:3100
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+## Showcase
+![image](https://github.com/user-attachments/assets/43bb553b-61f2-4f5a-a1af-ae63eaaab059)
+
