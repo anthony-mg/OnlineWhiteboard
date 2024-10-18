@@ -40,17 +40,20 @@ This is an example of how to list things you need to use the software and how to
 
 1. Clone the repo
    ```sh
-   git clone [https://github.com/anthony-mg/OnlineWhiteboard.git]
+   git clone https://github.com/anthony-mg/OnlineWhiteboard.git
    ```
 2. Install NPM packages
    ```sh
+   cd OnlineWhiteboard
+   ```
+   ```sh
    npm install
    ```
-3. Start the dev environment
+4. Start the dev environment
     ```sh
     npm run start
     ```
-4. To go localhost:3100
+5. To go localhost:3100
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
