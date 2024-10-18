@@ -47,9 +47,9 @@ This is an example of how to list things you need to use the software and how to
    npm install
    ```
 3. Start the dev environment
-  ```sh
-  npm run start
-  ```
+    ```sh
+    npm run start
+    ```
 4. To go localhost:3100
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
